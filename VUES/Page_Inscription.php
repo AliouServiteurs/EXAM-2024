@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/all.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Inscription</title>
+</head>
+<body class="bg-light">
+    <div class="container ">
+        <div class="row mt-5">
+            <div class="col-lg-4 bg-white m-auto rounded-top">
+                <h2 class="text-center"> Inscription</h2>
+                <p class="text-center text-muted lead"> Simple et Rapide </p>
+
+                <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
+                    <div class="input-group  mb-3">
+                        <span class="input-group-text">
+                            <i class="fa fa-user">
+                            </i> 
+                        </span>
+                        <input type="text" class="form-control" placeholder="Nom " name="nom" require>
+                    </div>
+                    <div class="input-group  mb-3">
+                        <span class="input-group-text">
+                            <i class="fa fa-user">
+                            </i> 
+                        </span>
+                        <input type="text" class="form-control" placeholder="Prénom " name="prenom" require>
+                    </div>
+                    <div class="input-group  mb-3">
+                        <span class="input-group-text">
+                            <i class="fa fa-envelope">
+                            </i> 
+                        </span>
+                        <input type="text" class="form-control" placeholder="Email " name="email" require>
+                    </div>
+                    <div class="input-group  mb-3">
+                        <span class="input-group-text">
+                            <i class="fa fa-lock">
+                            </i> 
+                        </span>
+                        <input type="text" class="form-control" placeholder="Mot de passe " name="mdpasse" require>
+                    </div>
+                    <div class="input-group  mb-3">
+                        <span class="input-group-text">
+                            <i class="fa fa-lock">
+                            </i> 
+                        </span>
+                        <input type="text" class="form-control" placeholder="Mot de passe confirmer" name="mdpasseConfirme" require>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success" name="submit">S’inscrire</button>
+                        <p class="text-center text-muted mt-3">
+                            En cliquant sur S’inscrire, vous acceptez nos <a href="#">  Conditions générales</a>, notre <a href=""> Politique de confidentialité </a> et notre <a href="#">  Politique d’utilisation</a> des cookies. 
+                        </p>
+                        <p class="text-center">
+                             Avez vous déjà un compte ?<a href="Page_connexion.php"> Connexion </a>
+                        </p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <?php
+        require_once "../CLASS/Connexion.class.PHP";
+
+        if (isset($_POST["submit"])) {
+            $email = htmlspecialchars($_POST["email"]);
+            $nom = htmlspecialchars($_POST["nom"]);
+            $prenom = htmlspecialchars($_POST["prenom"]);
+            $mdpasse = htmlspecialchars($_POST["mdpasse"]);
+            $mdpasseConfirme = htmlspecialchars($_POST["mdpasseConfirme"]);
+
+            if (!empty($_POST["prenom"]) && !empty($_POST["nom"])&&!empty($_POST["email"])&&!empty($_POST["mdpasse"])&&!empty($_POST["mdpasseConfirme"]) ) {
+                if($mdpasse == $mdpasseConfirme){
+                    $inscriptionInformation = new C_connexion();
+                    $inscriptionInformation->inscription($prenom, $nom, $email, $mdpasse);
+                    // header("Location:Page_connexion.php");    // redirection ver la pagze de connexion
+                    echo "VOTRE INSCRIPTION A BIEN REUSSIT !"
+
+                }else{
+                    echo "<p style='color:red;'>Les mot de mot ne correspondent pas !</p>";
+                }
+            }else{
+                echo "<p style='color:red;'> IL EXISTE UN OU DES CHAMPS VIDES !</p>";
+            }
+        }
+    ?>
+</body>
+</html>
