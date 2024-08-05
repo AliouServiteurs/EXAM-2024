@@ -10,3 +10,5 @@ Nous avons installé xampp pour travailler localement dans une base de donnée(s
 Notre objectif est d'enregistrer les informations des utilisateurs dans la base de donné . 
 Nous devons nous connecter à la base par PDO et enregistrer le mot de passe utilisateur haché c'est-à-dire illisible.
 Nous avons utilisé bootstrap pour le design des formulaire d'inscription et de connexion.
+Nous avons crée une base nommé  `bdprojet2024` et une tabele  `tcomptes`.
+La table contient les champs : `EMAIL`, `PRENOM`, `NOM`, `MOT DE PASSE`
